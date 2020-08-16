@@ -19,8 +19,8 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
-  width: 420px;
-  height: 420px;
+  width: 424px;
+  height: 424px;
   border: 2px solid black;
 }
 
@@ -28,4 +28,24 @@ h1 {
   width: 15px;
   height: 15px;
   background: blue;
+  border: 1px solid white;
+}
+
+.pac-dot {
+  background: green;
+  border: 5px solid white;
+}
+
+.wall {
+  background: blue;
+}
+
+.power-pellet {
+  background: orangered;
+  border-radius: 7.5px;
+}
+
+.pacman {
+  background: yellow;
+  border-radius: 7.5px;
 }
