@@ -830,19 +830,43 @@ let pacmanCurrentIndex = 490;
 squares[pacmanCurrentIndex].classList.add("pacman");
 
 function control(e) {
-  if (e.keyCode === 40) {
-    //down
-    pacmanCurrentIndex += 28;
-  } else if (e.keyCode === 39) {
-    // right
-    pacmanCurrentIndex -= 1;
-  } else if (e.keyCode === 38) {
-    // up
-    pacmanCurrentIndex -= 1;
-  } else if (e.keyCode === 37) {
-    //left
-    pacmanCurrentIndex -= 1;
+  squares[pacmanCurrentIndex].classList.remove("pacman");
+  switch (e.keyCode) {
+    case 40:
+      //down
+      if (
+        !squares[pacmanCurrentIndex + width].classList.contains("wall") &&
+        pacmanCurrentIndex + width < width * width
+      )
+        pacmanCurrentIndex += width;
+      break;
+    case 39:
+      // right
+      if (
+        !squares[pacmanCurrentIndex + 1].classList.contains("wall") &&
+        pacmanCurrentIndex % width < width - 1
+      )
+        pacmanCurrentIndex += 1;
+      break;
+    case 38:
+      // up
+      if (
+        !squares[pacmanCurrentIndex - width].classList.contains("wall") &&
+        pacmanCurrentIndex - width >= 0
+      )
+        pacmanCurrentIndex -= width;
+      break;
+    case 37:
+      // left
+      if (
+        !squares[pacmanCurrentIndex - 1].classList.contains("wall") &&
+        pacmanCurrentIndex % width !== 0
+      )
+        pacmanCurrentIndex -= 1;
+
+      break;
   }
+  squares[pacmanCurrentIndex].classList.add("pacman");
   console.log(pacmanCurrentIndex);
 }
 
