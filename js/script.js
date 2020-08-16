@@ -805,6 +805,24 @@ function createBoard() {
     grid.appendChild(square);
     // add square to squares array
     squares.push(square);
+
+    // 0 - pac-dots
+    // 1 - wall
+    // 2 - ghost-lair
+    // 3 - power-pellet
+    // 4 - empty
+
+    if (layout[i] === 0) {
+      squares[i].classList.add("pac-dot");
+    } else if (layout[i] === 1) {
+      squares[i].classList.add("wall");
+    } else if (layout[i] === 3) {
+      squares[i].classList.add("power-pellet");
+    }
+
+    // else if (layout[i] === 3) {
+    //   squares[i].classList.add("power-pellet");
+    // }
   }
 }
 createBoard();
