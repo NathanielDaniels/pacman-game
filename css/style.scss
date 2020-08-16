@@ -3,3 +3,29 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+html,
+body {
+  margin: 10;
+  padding: 10;
+}
+
+h1 {
+  text-align: center;
+  padding: 0.5em;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 420px;
+  height: 420px;
+  border: 2px solid black;
+}
+
+.grid div {
+  width: 15px;
+  height: 15px;
+  background: blue;
+}
