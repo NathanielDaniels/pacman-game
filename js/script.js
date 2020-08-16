@@ -1,7 +1,7 @@
 const width = 28;
+let squares = [];
 const grid = document.querySelector(".grid");
 const scoreDisplay = document.querySelector("#score");
-let squares = [];
 
 //28 * 28 = 784
 // 0 - pac-dots
@@ -819,11 +819,31 @@ function createBoard() {
     } else if (layout[i] === 3) {
       squares[i].classList.add("power-pellet");
     }
-
-    // else if (layout[i] === 3) {
-    //   squares[i].classList.add("power-pellet");
-    // }
   }
 }
 createBoard();
 console.log(squares);
+
+// starting position of pacman
+let pacmanCurrentIndex = 490;
+
+squares[pacmanCurrentIndex].classList.add("pacman");
+
+function control(e) {
+  if (e.keyCode === 40) {
+    //down
+    pacmanCurrentIndex += 28;
+  } else if (e.keyCode === 39) {
+    // right
+    pacmanCurrentIndex -= 1;
+  } else if (e.keyCode === 38) {
+    // up
+    pacmanCurrentIndex -= 1;
+  } else if (e.keyCode === 37) {
+    //left
+    pacmanCurrentIndex -= 1;
+  }
+  console.log(pacmanCurrentIndex);
+}
+
+document.addEventListener("keyup", (e) => control(e));
