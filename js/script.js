@@ -900,16 +900,36 @@ class Ghost {
     this.className = className;
     this.startIndex = startIndex;
     this.speed = speed;
+    this.currentIndex = startIndex;
+    this.isScared = false;
+    this.timerId = NaN;
   }
 }
 
-ghosts = [
+const ghosts = [
   new Ghost("blinky", 348, 250),
   new Ghost("pinky", 376, 400),
   new Ghost("inky", 351, 300),
   new Ghost("clyde", 379, 500),
 ];
 
+// draw ghosts onto grid
 ghosts.forEach((ghost) => {
   squares[ghost.startIndex].classList.add(ghost.className);
 });
+
+// move ghosts
+function moveGhost() {
+  console.log("moved ghost");
+  for (let ghost of ghosts) {
+    squares[ghost.currentIndex].classList.remove(ghost.className);
+    let randomMovement = Math.floor(Math.random() * ghost.currentIndex) + 1;
+    ghost.currentIndex -= randomMovement;
+    console.log(ghost);
+    squares[ghost.currentIndex].classList.add(ghost.className);
+  }
+}
+
+// setInterval(() => {
+//   moveGhost();
+// }, 1000);
