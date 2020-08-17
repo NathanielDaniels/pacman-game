@@ -2,6 +2,7 @@ const width = 28;
 let squares = [];
 const grid = document.querySelector(".grid");
 const scoreDisplay = document.querySelector("#score");
+let score = 0;
 
 //28 * 28 = 784
 // 0 - pac-dots
@@ -873,11 +874,42 @@ function control(e) {
       if (pacmanCurrentIndex === 364) {
         pacmanCurrentIndex = 391;
       }
-
       break;
   }
   squares[pacmanCurrentIndex].classList.add("pacman");
-  console.log(pacmanCurrentIndex);
+  pacDotEaten();
 }
 
 document.addEventListener("keyup", (e) => control(e));
+
+function pacDotEaten() {
+  if (squares[pacmanCurrentIndex].classList.contains("pac-dot")) {
+    squares[pacmanCurrentIndex].classList.remove("pac-dot");
+    score++;
+    scoreDisplay.textContent = score;
+  }
+  if (squares[pacmanCurrentIndex].classList.contains("power-pellet")) {
+    squares[pacmanCurrentIndex].classList.remove("power-pellet");
+    score += 10;
+    scoreDisplay.textContent = score;
+  }
+}
+
+class Ghost {
+  constructor(className, startIndex, speed) {
+    this.className = className;
+    this.startIndex = startIndex;
+    this.speed = speed;
+  }
+}
+
+ghosts = [
+  new Ghost("blinky", 348, 250),
+  new Ghost("pinky", 376, 400),
+  new Ghost("inky", 351, 300),
+  new Ghost("clyde", 379, 500),
+];
+
+ghosts.forEach((ghost) => {
+  squares[ghost.startIndex].classList.add(ghost.className);
+});

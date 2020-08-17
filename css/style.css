@@ -54,4 +54,24 @@ h1 {
   border-radius: 7.5px;
   border: 1px solid black;
 }
+
+.blinky {
+  background: red;
+  border: none;
+}
+
+.pinky {
+  background: pink;
+  border: none;
+}
+
+.inky {
+  background: darkblue;
+  border: none;
+}
+
+.clyde {
+  background: orange;
+  border: none;
+}
 /*# sourceMappingURL=style.css.map */
