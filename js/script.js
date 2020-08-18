@@ -916,20 +916,41 @@ const ghosts = [
 // draw ghosts onto grid
 ghosts.forEach((ghost) => {
   squares[ghost.startIndex].classList.add(ghost.className);
+  squares[ghost.startIndex].classList.add("ghost");
 });
 
 // move ghosts
-function moveGhost() {
-  console.log("moved ghost");
-  for (let ghost of ghosts) {
-    squares[ghost.currentIndex].classList.remove(ghost.className);
-    let randomMovement = Math.floor(Math.random() * ghost.currentIndex) + 1;
-    ghost.currentIndex -= randomMovement;
-    console.log(ghost);
-    squares[ghost.currentIndex].classList.add(ghost.className);
-  }
+// ghosts.forEach((ghost) => moveGhost(ghost));
+
+function moveGhost(ghost) {
+  // console.log("moved ghost");
+  const directions = [1, +1, -width, +width];
+  let direction = directions[Math.floor(Math.random() * directions.length)];
+
+  console.log(direction);
+
+  ghost.timerId = setInterval(function () {
+    // pacman death (error: only 1 ghost kills pacman)
+    if (squares[ghost.currentIndex + direction].classList.contains("pacman")) {
+      console.log("you died");
+      squares[pacmanCurrentIndex].classList.remove("pacman");
+      alert(`You Lose! Your High Score: ${score}`);
+    }
+
+    if (
+      !squares[ghost.currentIndex + direction].classList.contains("wall") &&
+      !squares[ghost.currentIndex + direction].classList.contains("ghost")
+    ) {
+      // remove ghosts
+      squares[ghost.currentIndex].classList.remove(ghost.className);
+
+      // change direction of ghost
+      ghost.currentIndex += direction;
+
+      // add ghost to new location
+      squares[ghost.currentIndex].classList.add(ghost.className);
+    } else direction = directions[Math.floor(Math.random() * directions.length)];
+  }, ghost.speed);
 }
 
-// setInterval(() => {
-//   moveGhost();
-// }, 1000);
+// clearInterval(ghost.timerId);
