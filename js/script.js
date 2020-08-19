@@ -878,9 +878,12 @@ function control(e) {
   squares[pacmanCurrentIndex].classList.add("pacman");
   pacDotEaten();
   powerPelletEaten();
+  checkForWin();
+  checkForGameOver();
 }
 
-document.addEventListener("keyup", (e) => control(e));
+// document.addEventListener("keyup", (e) => control(e));
+document.addEventListener("keyup", control);
 
 function pacDotEaten() {
   if (squares[pacmanCurrentIndex].classList.contains("pac-dot")) {
@@ -970,8 +973,6 @@ function moveGhost(ghost) {
       score += 100;
       squares[ghost.currentIndex].classList.add(ghost.className, "ghost");
     }
-    checkForGameOver();
-    checkForWin();
   }, ghost.speed);
 }
 
@@ -987,21 +988,9 @@ function checkForGameOver() {
 }
 
 function checkForWin() {
-  if (score >= 10) {
+  if (score >= 274) {
     ghosts.forEach((ghost) => clearInterval(ghost.timerId));
-    // document.removeEventListener("keyup", control());
     document.removeEventListener("keyup", control);
     scoreDisplay.innerHTML = `You Win! Your Score: ${score}`;
-    // squares[pacmanCurrentIndex].classList.remove("pacman");
-    pacmanCurrentIndex = startIndex;
-    ghosts.forEach((ghost) => (ghost.currentIndex = startIndex));
   }
 }
-
-// function checkForWin() {
-//   if (score >= 10) {
-//     ghosts.forEach((ghost) => clearInterval(ghost.timerId));
-//     document.removeEventListener("keyup", control);
-//     scoreDisplay.innerHTML = `You Win! Your Score: ${score}`;
-//   }
-// }
