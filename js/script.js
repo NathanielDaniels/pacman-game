@@ -4,7 +4,7 @@ const grid = document.querySelector(".grid");
 const scoreDisplay = document.querySelector("#score");
 let score = 0;
 
-//28 * 28 = 784
+// 28 * 28 = 784
 // 0 - pac-dots
 // 1 - wall
 // 2 - ghost-lair
@@ -971,6 +971,7 @@ function moveGhost(ghost) {
       squares[ghost.currentIndex].classList.add(ghost.className, "ghost");
     }
     checkForGameOver();
+    checkForWin();
   }, ghost.speed);
 }
 
@@ -984,3 +985,23 @@ function checkForGameOver() {
     scoreDisplay.innerHTML = `You Lose! Your Score: ${score}`;
   }
 }
+
+function checkForWin() {
+  if (score >= 10) {
+    ghosts.forEach((ghost) => clearInterval(ghost.timerId));
+    // document.removeEventListener("keyup", control());
+    document.removeEventListener("keyup", control);
+    scoreDisplay.innerHTML = `You Win! Your Score: ${score}`;
+    // squares[pacmanCurrentIndex].classList.remove("pacman");
+    pacmanCurrentIndex = startIndex;
+    ghosts.forEach((ghost) => (ghost.currentIndex = startIndex));
+  }
+}
+
+// function checkForWin() {
+//   if (score >= 10) {
+//     ghosts.forEach((ghost) => clearInterval(ghost.timerId));
+//     document.removeEventListener("keyup", control);
+//     scoreDisplay.innerHTML = `You Win! Your Score: ${score}`;
+//   }
+// }
